@@ -36,7 +36,6 @@
     "helmet": "^3.21.1",
     "lodash": "^4.17.15",
     "morgan": "^1.9.1",
-    "next": "^9.0.3",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
     "pg": "^7.12.1",
