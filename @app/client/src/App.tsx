@@ -1,23 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.less";
+import React from "react";
+import { Button, Typography } from "antd";
+const { Text, Paragraph } = Typography;
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Paragraph>
+          Edit <Text code>src/App.tsx</Text> and save to reload.
+        </Paragraph>
+        <Paragraph>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </Paragraph>
+        <Paragraph>
+          <Button type="primary" block href="https://reactjs.org">
           Learn React
-        </a>
+          </Button>
+        </Paragraph>
+
       </header>
     </div>
   );
