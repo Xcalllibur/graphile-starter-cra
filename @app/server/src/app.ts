@@ -84,6 +84,15 @@ export async function makeApp({
   await middleware.installPostGraphile(app);
 
   /*
+   * Client and other static assets: images/etc;
+   * In development, redirects to CRA DevServer at localhost:3001
+   * In production, served out of the /@app/client/build folder
+   *
+   * TODO: make optional, when all static files are served by a reverse proxy
+   */
+  await middleware.installClientStatic(app);
+
+  /*
    * Error handling middleware
    */
   await middleware.installErrorHandler(app);
