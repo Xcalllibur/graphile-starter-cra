@@ -23,8 +23,8 @@ const App: React.FC = () => {
           </a>
         </Paragraph>
         <Paragraph>
-          <Button type="primary" block href="https://reactjs.org">
-          Learn React
+          <Button type="primary" block href={process.env.ROOT_URL}>
+            Home
           </Button>
         </Paragraph>
 

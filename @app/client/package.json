@@ -23,11 +23,12 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "raw": "node -r @app/config/env node_modules/.bin/react-app-rewired",
     "dev": "BROWSER=none PORT=3001 yarn start",
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "start": "yarn raw start",
+    "build": "yarn raw build",
+    "test": "yarn raw test",
+    "eject": "yarn raw eject"
   },
   "eslintConfig": {
     "extends": "react-app"
