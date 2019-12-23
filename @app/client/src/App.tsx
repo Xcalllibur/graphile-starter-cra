@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,8 +7,9 @@ import {
 } from "react-router-dom";
 
 import "./App.less";
-import Home from "./routes/Home";
-import About from "./routes/About";
+
+const Home = lazy(() => import('./routes/Home'));
+const About = lazy(() => import('./routes/About'));
 
 const App: React.FC = () => {
   return (
@@ -26,16 +27,16 @@ const App: React.FC = () => {
             </ul>
           </nav>
 
-          {/* A <Switch> looks through its children <Route>s and
-              renders the first one that matches the current URL. */}
-          <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route exact path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </Suspense>
         </div>
       </Router>
     </div>
