@@ -1,15 +1,34 @@
-import React, { Suspense, lazy } from 'react';
+import "nprogress/nprogress.css";
+import "./App.less";
+import React, { Suspense, lazy, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import NProgress from "nprogress";
 
-import "./App.less";
 
 const Home = lazy(() => import('./routes/Home'));
 const About = lazy(() => import('./routes/About'));
+
+NProgress.configure({
+  showSpinner: false,
+});
+
+const Loading: React.FC = () => {
+  useEffect(() => {
+    console.log('Start')
+    NProgress.start();
+    return () => {
+      console.log('Stop')
+      NProgress.done();
+    };
+  }, []);
+
+  return null;
+};
 
 const App: React.FC = () => {
   return (
@@ -27,7 +46,7 @@ const App: React.FC = () => {
             </ul>
           </nav>
 
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading/>}>
             <Switch>
               <Route path="/about">
                 <About />
