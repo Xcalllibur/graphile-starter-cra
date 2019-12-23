@@ -1,34 +1,43 @@
-import logo from "./logo.svg";
-import "./App.less";
 import React from "react";
-import { Button, Typography } from "antd";
-const { Text, Paragraph } = Typography;
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import "./App.less";
+import Home from "./routes/Home";
+import About from "./routes/About";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Paragraph>
-          Edit <Text code>src/App.tsx</Text> and save to reload.
-        </Paragraph>
-        <Paragraph>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </Paragraph>
-        <Paragraph>
-          <Button type="primary" block href={process.env.ROOT_URL}>
-            Home
-          </Button>
-        </Paragraph>
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+            </ul>
+          </nav>
 
-      </header>
+          {/* A <Switch> looks through its children <Route>s and
+              renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
