@@ -21,7 +21,7 @@ import {
 import { useApolloClient } from "@apollo/react-hooks";
 import { useCallback } from "react";
 import StandardWidth from "./StandardWidth";
-import {Helmet} from "react-helmet";
+import {Helmet} from "react-helmet-async";
 import Warn from "./Warn";
 import Error from "./ErrorAlert";
 import { ApolloError } from "apollo-client";

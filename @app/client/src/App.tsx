@@ -8,6 +8,7 @@ import NProgress from "nprogress";
 
 import client from "./helpers/apolloClient";
 import Routes from "./Routes";
+import { HelmetProvider } from "react-helmet-async";
 
 NProgress.configure({
   showSpinner: false,
@@ -15,10 +16,8 @@ NProgress.configure({
 
 const Loading: React.FC = () => {
   useEffect(() => {
-    console.log('Start')
     NProgress.start();
     return () => {
-      console.log('Stop')
       NProgress.done();
     };
   }, []);
@@ -29,13 +28,15 @@ const Loading: React.FC = () => {
 const App: React.FC = () => {
   return (
     <div className="App">
-      <ApolloProvider client={client}>
-        <Router>
-          <Suspense fallback={<Loading/>}>
-            <Routes/>
-          </Suspense>
-        </Router>
-      </ApolloProvider>
+      <HelmetProvider>
+        <ApolloProvider client={client}>
+          <Router>
+            <Suspense fallback={<Loading/>}>
+              <Routes/>
+            </Suspense>
+          </Router>
+        </ApolloProvider>
+      </HelmetProvider>
     </div>
   );
 }
