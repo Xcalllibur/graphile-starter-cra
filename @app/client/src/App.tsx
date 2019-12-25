@@ -1,17 +1,13 @@
-import "nprogress/nprogress.css";
 import "./App.less";
-import React, { Suspense, lazy, useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
 } from "react-router-dom";
+import { ApolloProvider } from "@apollo/react-hooks";
 import NProgress from "nprogress";
 
-
-const Home = lazy(() => import('./routes/Home'));
-const About = lazy(() => import('./routes/About'));
+import client from "./helpers/apolloClient";
+import Routes from "./Routes";
 
 NProgress.configure({
   showSpinner: false,
@@ -33,31 +29,13 @@ const Loading: React.FC = () => {
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-            </ul>
-          </nav>
-
+      <ApolloProvider client={client}>
+        <Router>
           <Suspense fallback={<Loading/>}>
-            <Switch>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route exact path="/">
-                <Home />
-              </Route>
-            </Switch>
+            <Routes/>
           </Suspense>
-        </div>
-      </Router>
+        </Router>
+      </ApolloProvider>
     </div>
   );
 }

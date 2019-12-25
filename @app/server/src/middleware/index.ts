@@ -7,6 +7,7 @@ import installErrorHandler from "./installErrorHandler";
 import installCypressServerCommand from "./installCypressServerCommand";
 import installHelmet from "./installHelmet";
 import installClientStatic from "./installClientStatic";
+import installCors from "./installCors";
 
 export {
   installDatabasePools,
@@ -18,4 +19,5 @@ export {
   installCypressServerCommand,
   installHelmet,
   installClientStatic,
+  installCors,
 };

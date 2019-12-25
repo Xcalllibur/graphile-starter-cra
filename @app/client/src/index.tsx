@@ -1,10 +1,8 @@
-import "antd/dist/antd.less";
+import "./index.less";
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.less";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import "./antd-fixes.less"; // Last import for antd fixes, to not be overridden by other styles
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
