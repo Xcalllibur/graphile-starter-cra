@@ -9,7 +9,7 @@ import {
   Menu,
   Typography,
 } from "antd";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigation } from "react-navi";
 import { projectName, companyName } from "@app/config";
 import {
   useSharedLayoutQuery,
@@ -74,12 +74,12 @@ function CurrentUserUpdatedSubscription() {
 function SharedLayout({ title, noPad = false, children }: SharedLayoutProps) {
   const client = useApolloClient();
   const [logout] = useLogoutMutation();
-  const history = useHistory();
+  const navigation = useNavigation();
   const handleLogout = useCallback(async () => {
     await logout();
     client.resetStore();
-    history.push("/");
-  }, [client, logout, history]);
+    navigation.navigate("/");
+  }, [client, logout, navigation]);
   const renderChildren = (props: SharedLayoutChildProps) => {
     const inner =
       props.error && !props.loading ? (
@@ -104,7 +104,7 @@ function SharedLayout({ title, noPad = false, children }: SharedLayoutProps) {
         </Helmet>
         <Row type="flex" justify="space-between">
           <Col span={6}>
-            <Link to="/">
+            <Link href="/">
               Home
             </Link>
           </Col>
@@ -117,7 +117,7 @@ function SharedLayout({ title, noPad = false, children }: SharedLayoutProps) {
                 overlay={
                   <Menu>
                     <Menu.Item>
-                      <Link to="/settings" data-cy="layout-link-settings">
+                      <Link href="/settings" data-cy="layout-link-settings">
                         <Warn okay={data.currentUser.isVerified}>
                           Settings
                         </Warn>
@@ -145,7 +145,7 @@ function SharedLayout({ title, noPad = false, children }: SharedLayoutProps) {
                 </span>
               </Dropdown>
             ) : (
-              <Link to="/login" data-cy="header-login-button">
+              <Link href="/login" data-cy="header-login-button">
                 Sign in
               </Link>
             )}

@@ -1,39 +1,43 @@
 import "./App.less";
-import React, { Suspense, useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-} from "react-router-dom";
+import React, { Suspense } from 'react';
+import { Router, View, NotFoundBoundary, useLoadingRoute } from "react-navi";
 import { ApolloProvider } from "@apollo/react-hooks";
 import NProgress from "nprogress";
 
 import client from "./helpers/apolloClient";
-import Routes from "./Routes";
-import { HelmetProvider } from "react-helmet-async";
+import { HelmetProvider } from "react-navi-helmet-async";
+import routes from "./Routes";
+import FourOhFour from "./404";
 
 NProgress.configure({
   showSpinner: false,
 });
 
-const Loading: React.FC = () => {
-  useEffect(() => {
+function Loading() {
+  let loadingRoute = useLoadingRoute();
+
+  if (loadingRoute) {
     NProgress.start();
-    return () => {
-      NProgress.done();
-    };
-  }, []);
+  } else {
+    NProgress.done();
+  }
 
   return null;
-};
+}
+
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <HelmetProvider>
         <ApolloProvider client={client}>
-          <Router>
-            <Suspense fallback={<Loading/>}>
-              <Routes/>
-            </Suspense>
+          <Router routes={routes}>
+            <Loading/>
+            <NotFoundBoundary render={FourOhFour}>
+              <Suspense fallback={null}>
+                <View/>
+              </Suspense>
+            </NotFoundBoundary>
           </Router>
         </ApolloProvider>
       </HelmetProvider>

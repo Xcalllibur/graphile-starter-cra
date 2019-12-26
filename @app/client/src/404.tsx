@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
-import { H2, P } from "../components/Text";
-import SharedLayout from "../components/SharedLayout";
+import { Link } from "react-navi";
+import { H2, P } from "./components/Text";
+import SharedLayout from "./components/SharedLayout";
 import { Row, Col } from "antd";
 
-const FourOhFour: React.FC = () => {
+function FourOhFour() {
   return (
     <SharedLayout title="Page Not Found">
       <Row>
@@ -15,7 +14,7 @@ const FourOhFour: React.FC = () => {
             <P>
               The page you attempted to load was not found. Please check the URL and
               try again, or visit{" "}
-              <Link to="/">
+              <Link href="/">
                 the homepage
               </Link>
             </P>

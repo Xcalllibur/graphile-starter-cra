@@ -1,7 +1,11 @@
 import React from "react";
+import SharedLayout from "../components/SharedLayout";
 
 const About: React.FC = () => {
-  return <h2>About</h2>;
+  return (
+    <SharedLayout title="About">
+    </SharedLayout>
+  );
 }
 
 export default About;
