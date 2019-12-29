@@ -45,6 +45,9 @@ const routes = mount({
     "/accounts": route({
       getView: () => import("./routes/settings/Accounts")
     }),
+    "/delete": route({
+      getView: () => import("./routes/settings/Delete")
+    }),
   })
 })
 
