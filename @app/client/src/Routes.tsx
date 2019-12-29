@@ -5,9 +5,6 @@ const routes = mount({
   "/": route({
     getView: () => import("./routes/Home")
   }),
-  "/about": route({
-    getView: () => import("./routes/About")
-  }),
   "/login": map(async (_request, _context) =>
     route({
       getView: async (req, _context) => {
