@@ -42,6 +42,9 @@ const routes = mount({
     "/security": route({
       getView: () => import("./routes/settings/Security")
     }),
+    "/accounts": route({
+      getView: () => import("./routes/settings/Accounts")
+    }),
   })
 })
 
