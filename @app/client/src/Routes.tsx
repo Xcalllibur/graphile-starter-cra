@@ -13,6 +13,9 @@ const routes = mount({
       },
     })
   ),
+  "/register": route({
+    getView: () => import("./routes/Register")
+  }),
 })
 
 export default routes;
