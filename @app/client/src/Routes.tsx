@@ -24,6 +24,14 @@ const routes = mount({
       },
     })
   ),
+  "/reset": map(async (_request, _context) =>
+    route({
+      getView: async (req, _context) => {
+        const { Reset } = await import("./routes/Reset");
+        return <Reset userId={req.params["user-id"]} token={req.params["token"]} />
+      },
+    })
+  ),
   "/forgot": route({
     getView: () => import("./routes/Forgot")
   }),
