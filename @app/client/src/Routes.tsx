@@ -39,6 +39,9 @@ const routes = mount({
     "/": route({
       getView: () => import("./routes/settings/Index")
     }),
+    "/security": route({
+      getView: () => import("./routes/settings/Security")
+    }),
   })
 })
 
