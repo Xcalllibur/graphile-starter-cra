@@ -11,8 +11,7 @@ import SharedLayout, {
   Col,
   SharedLayoutChildProps,
 } from "../components/SharedLayout";
-import { redirect } from "navi";
-import { Link } from "react-navi";
+import { Link, useNavigation } from "react-navi";
 import { Form, Icon, Input, Button, Alert, Typography } from "antd";
 import { FormComponentProps, ValidateFieldsOptions } from "antd/lib/form/Form";
 import { promisify } from "util";
@@ -123,6 +122,7 @@ function LoginForm({
 }: LoginFormProps) {
   const [login] = useLoginMutation({});
   const client = useApolloClient();
+  const navigation = useNavigation();
   const validateFields: (
     fieldNames?: Array<string>,
     options?: ValidateFieldsOptions
@@ -146,7 +146,7 @@ function LoginForm({
         // Success: refetch
         resetWebsocketConnection();
         client.resetStore();
-        redirect(onSuccessRedirectTo);
+        navigation.navigate(onSuccessRedirectTo);
       } catch (e) {
         const code = getCodeFromError(e);
         if (code === "CREDS") {
@@ -161,7 +161,7 @@ function LoginForm({
         }
       }
     },
-    [client, form, login, onSuccessRedirectTo, setError, validateFields]
+    [client, form, login, onSuccessRedirectTo, setError, validateFields, navigation]
   );
 
   const focusElement = useRef<Input>(null);

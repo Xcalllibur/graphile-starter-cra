@@ -9,7 +9,7 @@ import React, {
 import SharedLayout from "../components/SharedLayout";
 import { useApolloClient } from "@apollo/react-hooks";
 import { useRegisterMutation } from "@app/graphql";
-import { redirect } from "navi";
+import { useNavigation } from "react-navi";
 import { FormComponentProps, ValidateFieldsOptions } from "antd/lib/form/Form";
 import { Form, Input, Tooltip, Icon, Button, Alert } from "antd";
 import { SyntheticEvent } from "react";
@@ -79,6 +79,7 @@ function RegistrationForm({
 }: RegistrationFormProps) {
   const [register] = useRegisterMutation({});
   const client = useApolloClient();
+  const navigation = useNavigation();
   const [confirmDirty, setConfirmDirty] = useState(false);
 
   const validateFields: (
@@ -110,7 +111,7 @@ function RegistrationForm({
         // Success: refetch
         resetWebsocketConnection();
         client.resetStore();
-        redirect(onSuccessRedirectTo);
+        navigation.navigate(onSuccessRedirectTo);
       } catch (e) {
         const code = getCodeFromError(e);
         const exception = getExceptionFromError(e);
@@ -172,6 +173,7 @@ function RegistrationForm({
       onSuccessRedirectTo,
       form,
       setError,
+      navigation,
     ]
   );
 
