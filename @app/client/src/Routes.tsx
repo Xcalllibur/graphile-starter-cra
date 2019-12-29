@@ -16,6 +16,14 @@ const routes = mount({
   "/register": route({
     getView: () => import("./routes/Register")
   }),
+  "/verify": map(async (_request, _context) =>
+    route({
+      getView: async (req, _context) => {
+        const { Verify } = await import("./routes/Verify");
+        return <Verify id={req.params.id} token={req.params.token} />
+      },
+    })
+  ),
   "/forgot": route({
     getView: () => import("./routes/Forgot")
   }),
