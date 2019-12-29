@@ -35,6 +35,11 @@ const routes = mount({
   "/forgot": route({
     getView: () => import("./routes/Forgot")
   }),
+  "/settings": mount({
+    "/": route({
+      getView: () => import("./routes/settings/Index")
+    }),
+  })
 })
 
 export default routes;
