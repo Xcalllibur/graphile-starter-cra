@@ -10,6 +10,8 @@ import { SubscriptionClient } from "subscriptions-transport-ws";
 
 let wsClient: SubscriptionClient | null = null;
 
+const isDev = process.env.NODE_ENV !== "production";
+
 export function resetWebsocketConnection(): void {
   if (wsClient) {
     wsClient.close(false, false);
@@ -19,7 +21,7 @@ export function resetWebsocketConnection(): void {
 function makeMainLink(ROOT_URL: string) {
   const httpLink = new HttpLink({
     uri: `${ROOT_URL}/graphql`,
-    credentials: "same-origin",
+    credentials: isDev ? "include" : "same-origin",
   });
   wsClient = new SubscriptionClient(
     `${ROOT_URL.replace(/^http/, "ws")}/graphql`,
