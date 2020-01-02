@@ -18,6 +18,10 @@ process.env.SHADOW_AUTH_DATABASE_URL =
 // Always overwrite test database URL
 process.env.TEST_DATABASE_URL = `postgres://${process.env.DATABASE_OWNER}:${process.env.DATABASE_OWNER_PASSWORD}@${process.env.DATABASE_HOST}/${process.env.DATABASE_NAME}_test`;
 
+if (process.env.IS_CRA_DEVSERVER) {
+  process.env.PORT = process.env.CRA_DEVSERVER_PORT;
+}
+
 // https://docs.cypress.io/guides/guides/environment-variables.html#Option-3-CYPRESS
 process.env.CYPRESS_ROOT_URL = process.env.ROOT_URL;
-process.env.CYPRESS_FRONTEND_URL = (process.env.NODE_ENV === "development" ? "http://localhost:3001" : process.env.ROOT_URL);
+process.env.CYPRESS_FRONTEND_URL = (process.env.NODE_ENV === "development" ? `http://localhost:${process.env.CRA_DEVSERVER_PORT}` : process.env.ROOT_URL);
