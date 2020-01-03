@@ -2,13 +2,12 @@ import React from "react";
 import SharedLayout, {
   SharedLayoutChildProps,
 } from "../components/SharedLayout";
-import Link from "next/link";
+import { Link, useCurrentRoute } from "react-navi";
 import { Layout, Menu, Typography } from "antd";
 import StandardWidth from "./StandardWidth";
 import Warn from "./Warn";
 import Redirect from "./Redirect";
 import { TextProps } from "antd/lib/typography/Text";
-import { useRouter, NextRouter } from "next/router";
 import * as qs from "querystring";
 
 const { Text } = Typography;
@@ -53,8 +52,10 @@ const pages = {
   }),
 };
 
+type PageHref = keyof (typeof pages);
+
 interface SettingsLayoutProps {
-  href: keyof typeof pages;
+  href: PageHref;
   children: React.ReactNode;
 }
 
@@ -62,12 +63,11 @@ export default function SettingsLayout({
   href: inHref,
   children,
 }: SettingsLayoutProps) {
-  const href = pages[inHref] ? inHref : Object.keys(pages)[0];
+  const href = pages[inHref] ? inHref : (Object.keys(pages)[0] as PageHref);
   const page = pages[href];
-  // `useRouter()` sometimes returns null
-  const router: NextRouter | null = useRouter();
+  const curRoute = useCurrentRoute()
   const fullHref =
-    href + (router && router.query ? `?${qs.stringify(router.query)}` : "");
+    href + (curRoute && curRoute.url && curRoute.url.query ? `?${qs.stringify(curRoute.url.query)}` : "");
   return (
     <SharedLayout title={`Settings: ${page.title}`} noPad>
       {({ currentUser, error, loading }: SharedLayoutChildProps) =>
@@ -77,22 +77,20 @@ export default function SettingsLayout({
           <Layout style={{ minHeight: "calc(100vh - 64px - 64px)" }} hasSider>
             <Sider>
               <Menu selectedKeys={[href]}>
-                {Object.keys(pages).map(pageHref => (
+                {(Object.keys(pages) as PageHref[]).map(pageHref => (
                   <Menu.Item key={pageHref}>
-                    <Link href={pageHref}>
-                      <a data-cy={pages[pageHref].cy}>
-                        <Warn
-                          okay={
-                            !currentUser ||
-                            currentUser.isVerified ||
-                            !pages[pageHref].warnIfUnverified
-                          }
-                        >
-                          <Text {...pages[pageHref].titleProps}>
-                            {pages[pageHref].title}
-                          </Text>
-                        </Warn>
-                      </a>
+                    <Link href={pageHref} data-cy={pages[pageHref].cy}>
+                      <Warn
+                        okay={
+                          !currentUser ||
+                          currentUser.isVerified ||
+                          !pages[pageHref].warnIfUnverified
+                        }
+                      >
+                        <Text {...pages[pageHref].titleProps}>
+                          {pages[pageHref].title}
+                        </Text>
+                      </Warn>
                     </Link>
                   </Menu.Item>
                 ))}

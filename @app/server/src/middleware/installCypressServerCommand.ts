@@ -23,7 +23,7 @@ export default (app: Express) => {
    * responsible for parsing the request and handing it off to the relevant
    * function.
    */
-  const handleCypressServerCommand: RequestHandler = async (req, res, next) => {
+  const handleCypressServerCommand: RequestHandler = async (req, res, _next) => {
     /*
      * If we didn't set ENABLE_CYPRESS_COMMANDS, output a warning to the server
      * log, and then pretend the /cypressServerCommand route doesn't exist.
@@ -32,8 +32,11 @@ export default (app: Express) => {
       console.error(
         "/cypressServerCommand denied because ENABLE_CYPRESS_COMMANDS is not set."
       );
-      // Pretend like nothing happened
-      next();
+      res.status(500).json({
+        error: {
+          message: "/cypressServerCommand denied",
+        },
+      });
       return;
     }
 

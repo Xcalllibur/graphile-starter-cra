@@ -9,12 +9,12 @@ import {
 import { promisify } from "util";
 import { Form, Input, Alert, Button } from "antd";
 import { ApolloError } from "apollo-client";
+import { Link } from "react-navi";
 import { FormComponentProps, ValidateFieldsOptions } from "antd/lib/form/Form";
 import { getCodeFromError, extractError } from "../../errors";
 import { formItemLayout, tailFormItemLayout } from "../../forms";
 import ErrorAlert from "../../components/ErrorAlert";
 import { H3, P } from "../../components/Text";
-import Link from "next/link";
 
 const Settings_Security: NextPage = () => {
   const [error, setError] = useState<Error | ApolloError | null>(null);

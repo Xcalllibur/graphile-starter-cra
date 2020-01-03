@@ -9,7 +9,7 @@ import {
   Menu,
   Typography,
 } from "antd";
-import Link from "next/link";
+import { Link, useNavigation } from "react-navi";
 import { projectName, companyName } from "@app/config";
 import {
   useSharedLayoutQuery,
@@ -17,11 +17,11 @@ import {
   useCurrentUserUpdatedSubscription,
   SharedLayout_UserFragment,
 } from "@app/graphql";
-import Router from "next/router";
+// import Router from "next/router";
 import { useApolloClient } from "@apollo/react-hooks";
 import { useCallback } from "react";
 import StandardWidth from "./StandardWidth";
-import Head from "next/head";
+import {Helmet} from "react-helmet-async";
 import Warn from "./Warn";
 import Error from "./ErrorAlert";
 import { ApolloError } from "apollo-client";
@@ -74,11 +74,12 @@ function CurrentUserUpdatedSubscription() {
 function SharedLayout({ title, noPad = false, children }: SharedLayoutProps) {
   const client = useApolloClient();
   const [logout] = useLogoutMutation();
+  const navigation = useNavigation();
   const handleLogout = useCallback(async () => {
     await logout();
     client.resetStore();
-    Router.push("/");
-  }, [client, logout]);
+    navigation.navigate("/");
+  }, [client, logout, navigation]);
   const renderChildren = (props: SharedLayoutChildProps) => {
     const inner =
       props.error && !props.loading ? (
@@ -96,15 +97,15 @@ function SharedLayout({ title, noPad = false, children }: SharedLayoutProps) {
     <Layout>
       {data && data.currentUser ? <CurrentUserUpdatedSubscription /> : null}
       <Header style={{ boxShadow: "0 2px 8px #f0f1f2", zIndex: 1 }}>
-        <Head>
+        <Helmet>
           <title>
             {title} — {projectName}
           </title>
-        </Head>
+        </Helmet>
         <Row type="flex" justify="space-between">
           <Col span={6}>
             <Link href="/">
-              <a>Home</a>
+              Home
             </Link>
           </Col>
           <Col>
@@ -116,16 +117,14 @@ function SharedLayout({ title, noPad = false, children }: SharedLayoutProps) {
                 overlay={
                   <Menu>
                     <Menu.Item>
-                      <Link href="/settings">
-                        <a data-cy="layout-link-settings">
-                          <Warn okay={data.currentUser.isVerified}>
-                            Settings
-                          </Warn>
-                        </a>
+                      <Link href="/settings" data-cy="layout-link-settings">
+                        <Warn okay={data.currentUser.isVerified}>
+                          Settings
+                        </Warn>
                       </Link>
                     </Menu.Item>
-                    <Menu.Item>
-                      <a onClick={handleLogout}>Logout</a>
+                    <Menu.Item onClick={handleLogout}>
+                      Logout
                     </Menu.Item>
                   </Menu>
                 }
@@ -146,8 +145,8 @@ function SharedLayout({ title, noPad = false, children }: SharedLayoutProps) {
                 </span>
               </Dropdown>
             ) : (
-              <Link href="/login">
-                <a data-cy="header-login-button">Sign in</a>
+              <Link href="/login" data-cy="header-login-button">
+                Sign in
               </Link>
             )}
           </Col>

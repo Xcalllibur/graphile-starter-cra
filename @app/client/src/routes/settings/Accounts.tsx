@@ -6,21 +6,26 @@ import {
   useUnlinkUserAuthenticationMutation,
   UserAuthentication,
 } from "@app/graphql";
-import { Spin, List, Avatar, Modal } from "antd";
+import { Spin, List, Avatar, Modal, Button } from "antd";
 import SocialLoginOptions from "../../components/SocialLoginOptions";
 import Error from "../../components/ErrorAlert";
 import { H3, H4, Strong } from "../../components/Text";
 
-const AUTH_NAME_LOOKUP = {
+const AUTH_NAME_LOOKUP: {
+  [key: string]: string;
+} = {
   github: "GitHub",
   facebook: "Facebook",
   twitter: "Twitter",
 };
+
 function authName(service: string) {
   return AUTH_NAME_LOOKUP[service] || service;
 }
 
-const AUTH_ICON_LOOKUP = {
+const AUTH_ICON_LOOKUP: {
+  [key: string]: string;
+} = {
   github: "github",
 };
 function authAvatar(service: string) {
@@ -62,9 +67,9 @@ function UnlinkAccountButton({ id }: { id: number }) {
         If you unlink this account you won't be able to log in with it any more;
         please make sure your email is valid.
       </Modal>
-      <a key="unlink" onClick={handleOpenModal}>
+      <Button type="link" key="unlink" onClick={handleOpenModal}>
         {deleting ? <Spin /> : "Unlink"}
-      </a>
+      </Button>
     </>
   );
 }

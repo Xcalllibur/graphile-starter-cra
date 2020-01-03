@@ -11,23 +11,21 @@ import SharedLayout, {
   Col,
   SharedLayoutChildProps,
 } from "../components/SharedLayout";
-import { NextPage } from "next";
-import Link from "next/link";
+import { Link, useNavigation } from "react-navi";
 import { Form, Icon, Input, Button, Alert, Typography } from "antd";
 import { FormComponentProps, ValidateFieldsOptions } from "antd/lib/form/Form";
 import { promisify } from "util";
 import { useApolloClient } from "@apollo/react-hooks";
 import { useLoginMutation } from "@app/graphql";
-import Router from "next/router";
 import { ApolloError } from "apollo-client";
 import { getCodeFromError, extractError } from "../errors";
 import Redirect from "../components/Redirect";
 import SocialLoginOptions from "../components/SocialLoginOptions";
-import { resetWebsocketConnection } from "../lib/withApollo";
+import { resetWebsocketConnection } from "../helpers/apolloClient";
 
 const { Paragraph } = Typography;
 
-function hasErrors(fieldsError: Object) {
+function hasErrors(fieldsError: Record<string, string[] | undefined>) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
@@ -42,7 +40,7 @@ function isSafe(nextUrl: string | null) {
 /**
  * Login page just renders the standard layout and embeds the login form
  */
-const Login: NextPage<LoginProps> = ({ next: rawNext }) => {
+export const Login: React.FC<LoginProps> = ({ next: rawNext }) => {
   const [error, setError] = useState<Error | ApolloError | null>(null);
   const [showLogin, setShowLogin] = useState<boolean>(false);
   const next: string = isSafe(rawNext) ? rawNext! : "/";
@@ -88,8 +86,8 @@ const Login: NextPage<LoginProps> = ({ next: rawNext }) => {
                   <Col>
                     <Paragraph>
                       No Account?{" "}
-                      <Link href="/register">
-                        <a data-cy="loginpage-button-register">Create One</a>
+                      <Link href="/register" data-cy="loginpage-button-register">
+                        Create One
                       </Link>
                     </Paragraph>
                   </Col>
@@ -101,13 +99,7 @@ const Login: NextPage<LoginProps> = ({ next: rawNext }) => {
       }
     </SharedLayout>
   );
-};
-
-Login.getInitialProps = async ({ query }) => ({
-  next: typeof query.next === "string" ? query.next : null,
-});
-
-export default Login;
+}
 
 interface FormValues {
   username: string;
@@ -130,6 +122,7 @@ function LoginForm({
 }: LoginFormProps) {
   const [login] = useLoginMutation({});
   const client = useApolloClient();
+  const navigation = useNavigation();
   const validateFields: (
     fieldNames?: Array<string>,
     options?: ValidateFieldsOptions
@@ -153,7 +146,7 @@ function LoginForm({
         // Success: refetch
         resetWebsocketConnection();
         client.resetStore();
-        Router.push(onSuccessRedirectTo);
+        navigation.navigate(onSuccessRedirectTo);
       } catch (e) {
         const code = getCodeFromError(e);
         if (code === "CREDS") {
@@ -168,7 +161,7 @@ function LoginForm({
         }
       }
     },
-    [client, form, login, onSuccessRedirectTo, setError, validateFields]
+    [client, form, login, onSuccessRedirectTo, setError, validateFields, navigation]
   );
 
   const focusElement = useRef<Input>(null);
@@ -220,7 +213,7 @@ function LoginForm({
         )}
 
         <Link href="/forgot">
-          <a>Forgotten password?</a>
+          Forgotten password?
         </Link>
       </Form.Item>
 
@@ -252,9 +245,13 @@ function LoginForm({
         >
           Sign in
         </Button>
-        <a style={{ marginLeft: 16 }} onClick={onCancel}>
+        <Button
+          type="link"
+          style={{ marginLeft: 16 }}
+          onClick={onCancel}
+        >
           Use a different sign in method
-        </a>
+        </Button>
       </Form.Item>
     </Form>
   );

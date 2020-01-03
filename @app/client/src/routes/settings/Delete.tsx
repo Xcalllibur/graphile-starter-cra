@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import SettingsLayout from "../../components/SettingsLayout";
-import { NextPage } from "next";
 import { H3, P } from "../../components/Text";
 import { Alert, Button, Modal, Typography } from "antd";
 import ErrorAlert from "../../components/ErrorAlert";
@@ -9,16 +8,14 @@ import {
   useRequestAccountDeletionMutation,
   useConfirmAccountDeletionMutation,
 } from "@app/graphql";
-import { useRouter } from "next/router";
+import { useCurrentRoute } from "react-navi";
 
 const { Text } = Typography;
 
-const Settings_Accounts: NextPage = () => {
-  const router = useRouter();
+const Settings_Accounts: React.FC = () => {
+  const curRoute = useCurrentRoute()
   const token: string | null =
-    (router && router.query && !Array.isArray(router.query.token)
-      ? router.query.token
-      : null) || null;
+    (curRoute && curRoute.url && curRoute.url.query && curRoute.url.query.token) || null;
   const [error, setError] = useState<Error | ApolloError | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [itIsDone, setItIsDone] = useState(false);

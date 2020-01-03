@@ -2,7 +2,6 @@ import React, { useCallback, useState, useEffect } from "react";
 import get from "lodash/get";
 import { Alert, Form, Button, Input } from "antd";
 import SharedLayout, { Row, Col } from "../components/SharedLayout";
-import { NextPage } from "next";
 import { useResetPasswordMutation } from "@app/graphql";
 import { P } from "../components/Text";
 
@@ -11,10 +10,7 @@ interface IProps {
   token: string | null;
 }
 
-const ResetPage: NextPage<IProps> = ({
-  userId: rawUserId,
-  token: rawToken,
-}) => {
+export const Reset: React.FC<IProps> = ({ userId: rawUserId, token: rawToken }) => {
   const [[userId, token], setIdAndToken] = useState<[number, string]>([
     rawUserId || 0,
     rawToken || "",
@@ -111,11 +107,5 @@ const ResetPage: NextPage<IProps> = ({
       </Row>
     </SharedLayout>
   );
-};
+}
 
-ResetPage.getInitialProps = async ({ query: { user_id, token } = {} }) => ({
-  userId: typeof user_id === "string" ? parseInt(user_id, 10) || null : null,
-  token: typeof token === "string" ? token : null,
-});
-
-export default ResetPage;

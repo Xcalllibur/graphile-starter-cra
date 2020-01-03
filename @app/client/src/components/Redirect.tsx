@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import Router from "next/router";
+import { useNavigation } from "react-navi";
 
 interface RedirectProps {
   href: string;
 }
 
 export default function Redirect({ href }: RedirectProps) {
+  const navigation = useNavigation()
   useEffect(() => {
-    Router.push(href);
-  }, [href]);
+    navigation.navigate(href);
+  }, [href, navigation]);
   return <div>Redirecting...</div>;
 }

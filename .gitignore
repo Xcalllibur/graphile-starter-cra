@@ -1,6 +1,6 @@
 .env
-.next
 node_modules
+build
 dist
 /heroku-setup
 /yarn-error.log

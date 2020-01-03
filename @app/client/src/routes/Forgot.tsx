@@ -8,15 +8,14 @@ import React, {
 } from "react";
 import { promisify } from "util";
 import SharedLayout from "../components/SharedLayout";
-import { NextPage } from "next";
-import Link from "next/link";
+import { Link } from "react-navi";
 import { Form, Icon, Input, Button, Alert } from "antd";
 import { FormComponentProps, ValidateFieldsOptions } from "antd/lib/form/Form";
 import { useForgotPasswordMutation } from "@app/graphql";
 import { ApolloError } from "apollo-client";
 import { getCodeFromError, extractError } from "../errors";
 
-const ForgotPassword: NextPage = () => {
+const ForgotPassword: React.FC = () => {
   const [error, setError] = useState<Error | ApolloError | null>(null);
   return (
     <SharedLayout title="Forgot Password">
@@ -24,8 +23,6 @@ const ForgotPassword: NextPage = () => {
     </SharedLayout>
   );
 };
-
-export default ForgotPassword;
 
 interface FormValues {
   email: string;
@@ -145,7 +142,7 @@ function ForgotPasswordForm({
       <Form.Item>
         <p>
           <Link href="/login">
-            <a>Remembered your password? Log in.</a>
+            Remembered your password? Log in.
           </Link>
         </p>
       </Form.Item>
@@ -159,3 +156,5 @@ const WrappedForgotPasswordForm = Form.create<ForgotPasswordFormProps>({
     props.setError(null);
   },
 })(ForgotPasswordForm);
+
+export default ForgotPassword;

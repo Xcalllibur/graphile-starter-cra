@@ -1,8 +1,9 @@
-import * as React from "react";
+import "./Home.less";
+import React from "react";
 import { Button, Row, Col, Typography, Divider } from "antd";
-const { Text, Title, Paragraph } = Typography;
 import SharedLayout from "../components/SharedLayout";
-import { NextPage } from "next";
+
+const { Text, Title, Paragraph } = Typography;
 
 // Convenience helper
 const Li = ({ children, ...props }: any) => (
@@ -11,7 +12,7 @@ const Li = ({ children, ...props }: any) => (
   </li>
 );
 
-const Home: NextPage = () => {
+const Home: React.FC = () => {
   return (
     <SharedLayout title="Home">
       <Row type="flex" justify="space-between" gutter={32}>
@@ -274,7 +275,7 @@ const Home: NextPage = () => {
           <Title level={4}>PostGraphile relies on your support</Title>
           <Paragraph strong>A message from Benjie</Paragraph>
           <Paragraph>
-            I really hope that this project wows you 😍 and saves you huge
+            I really hope that this project wows you <span role="img" aria-label="heart eyes">😍</span> and saves you huge
             amounts of time. I've certainly poured a lot of time into it!
           </Paragraph>
           <Paragraph>
@@ -289,12 +290,10 @@ const Home: NextPage = () => {
           <Paragraph>
             Every contribution helps us to spend more time on open source.
           </Paragraph>
-          <Paragraph>
-            <Button type="primary" block href="https://graphile.org/sponsor">
-              Sponsor Graphile Today
-            </Button>
-          </Paragraph>
-          <Paragraph>Thank you! 🙏</Paragraph>
+          <Button className="sponsor-graphile" type="primary" block href="https://graphile.org/sponsor">
+            Sponsor Graphile Today
+          </Button>
+          <Paragraph>Thank you! <span role="img" aria-label="thanks">🙏</span></Paragraph>
         </Col>
       </Row>
     </SharedLayout>

@@ -7,14 +7,13 @@ import React, {
   FocusEvent,
 } from "react";
 import SharedLayout from "../components/SharedLayout";
-import { NextPage } from "next";
 import { useApolloClient } from "@apollo/react-hooks";
 import { useRegisterMutation } from "@app/graphql";
+import { useNavigation } from "react-navi";
 import { FormComponentProps, ValidateFieldsOptions } from "antd/lib/form/Form";
 import { Form, Input, Tooltip, Icon, Button, Alert } from "antd";
 import { SyntheticEvent } from "react";
 import { promisify } from "util";
-import Router from "next/router";
 import { ApolloError } from "apollo-client";
 import {
   getCodeFromError,
@@ -22,13 +21,13 @@ import {
   extractError,
 } from "../errors";
 import { formItemLayout, tailFormItemLayout } from "../forms";
-import { resetWebsocketConnection } from "../lib/withApollo";
+import { resetWebsocketConnection } from "../helpers/apolloClient";
 
 /**
  * The registration page just renders the standard layout and embeds the
  * registration form.
  */
-const Register: NextPage = () => {
+const Register: React.FC = () => {
   const [error, setError] = useState<Error | ApolloError | null>(null);
   return (
     <SharedLayout title="Register">
@@ -40,8 +39,6 @@ const Register: NextPage = () => {
     </SharedLayout>
   );
 };
-
-export default Register;
 
 /**
  * These are the values in our form
@@ -80,6 +77,7 @@ function RegistrationForm({
 }: RegistrationFormProps) {
   const [register] = useRegisterMutation({});
   const client = useApolloClient();
+  const navigation = useNavigation();
   const [confirmDirty, setConfirmDirty] = useState(false);
 
   const validateFields: (
@@ -111,10 +109,11 @@ function RegistrationForm({
         // Success: refetch
         resetWebsocketConnection();
         client.resetStore();
-        Router.push(onSuccessRedirectTo);
+        navigation.navigate(onSuccessRedirectTo);
       } catch (e) {
         const code = getCodeFromError(e);
         const exception = getExceptionFromError(e);
+        // @ts-ignore
         const fields: any = exception && exception["fields"];
         if (code === "WEAKP") {
           form.setFields({
@@ -172,6 +171,7 @@ function RegistrationForm({
       onSuccessRedirectTo,
       form,
       setError,
+      navigation,
     ]
   );
 
@@ -361,3 +361,5 @@ const WrappedRegistrationForm = Form.create<RegistrationFormProps>({
     props.setError(null);
   },
 })(RegistrationForm);
+
+export default Register;

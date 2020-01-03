@@ -71,18 +71,25 @@ export async function makeApp({
    * express middleware. These helpers may be asynchronous, but they should
    * operate very rapidly to enable quick as possible server startup.
    */
+  await middleware.installCors(app);
   await middleware.installDatabasePools(app);
   await middleware.installHelmet(app);
   await middleware.installSession(app);
   await middleware.installPassport(app);
   await middleware.installLogging(app);
-  // These are our assets: images/etc; served out of the /@app/server/public folder (if present)
-  await middleware.installSharedStatic(app);
   if (isTest || isDev) {
     await middleware.installCypressServerCommand(app);
   }
   await middleware.installPostGraphile(app);
-  await middleware.installSSR(app);
+
+  /*
+   * Client and other static assets: images/etc;
+   * In development, redirects to CRA DevServer
+   * In production, served out of the /@app/client/build folder
+   *
+   * TODO: make optional, when all static files are served by a reverse proxy
+   */
+  await middleware.installClientStatic(app);
 
   /*
    * Error handling middleware

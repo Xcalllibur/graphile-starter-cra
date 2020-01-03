@@ -37,5 +37,6 @@ export function getCodeFromError(
   error: null | Error | ApolloError | GraphQLError
 ): null | string {
   const err = getExceptionFromError(error);
-  return (err && err["code"]) || null;
+  // @ts-ignore
+  return (err && err.code ) || null;
 }

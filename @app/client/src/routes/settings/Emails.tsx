@@ -41,38 +41,41 @@ function Email({
           <span data-cy="settingsemails-indicator-primary">Primary</span>
         ),
         canDelete && (
-          <a
+          <Button
+            type="link"
             onClick={() => deleteEmail({ variables: { emailId: email.id } })}
             data-cy="settingsemails-button-delete"
           >
             Delete
-          </a>
+          </Button>
         ),
         !email.isVerified && (
-          <a
+          <Button
+            type="link"
             onClick={() =>
               resendEmailVerification({ variables: { emailId: email.id } })
             }
           >
             Resend verification
-          </a>
+          </Button>
         ),
         email.isVerified && !email.isPrimary && (
-          <a
+          <Button
+            type="link"
             onClick={() =>
               makeEmailPrimary({ variables: { emailId: email.id } })
             }
             data-cy="settingsemails-button-makeprimary"
           >
             Make primary
-          </a>
+          </Button>
         ),
       ].filter(_ => _)}
     >
       <List.Item.Meta
         avatar={
           <Avatar size="large" style={{ backgroundColor: "transparent" }}>
-            ✉️
+            <span role="img" aria-label="email">✉️</span>
           </Avatar>
         }
         title={
