@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import SettingsLayout from "../../components/SettingsLayout";
-import { NextPage } from "next";
 import {
   useCurrentUserAuthenticationsQuery,
   useUnlinkUserAuthenticationMutation,
@@ -93,7 +92,7 @@ function renderAuth(
   );
 }
 
-const Settings_Accounts: NextPage = () => {
+const Settings_Accounts: React.FC = () => {
   const { data, loading, error } = useCurrentUserAuthenticationsQuery();
 
   const linkedAccounts =

@@ -18,17 +18,19 @@ const routes = mount({
   }),
   "/verify": map(async (_request, _context) =>
     route({
-      getView: async (req, _context) => {
+      getView: async ({params: {id, token}}, _context) => {
         const { Verify } = await import("./routes/Verify");
-        return <Verify id={req.params.id} token={req.params.token} />
+        const idNum = typeof id === "string" ? parseInt(id, 10) || null : null;
+        return <Verify id={idNum} token={token} />
       },
     })
   ),
   "/reset": map(async (_request, _context) =>
     route({
-      getView: async (req, _context) => {
+      getView: async ({params: {user_id, token}}, _context) => {
         const { Reset } = await import("./routes/Reset");
-        return <Reset userId={req.params["user-id"]} token={req.params["token"]} />
+        const userIdNum = typeof user_id === "string" ? parseInt(user_id, 10) || null : null
+        return <Reset userId={userIdNum} token={token} />
       },
     })
   ),

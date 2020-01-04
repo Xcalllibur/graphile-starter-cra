@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useMemo } from "react";
 import { promisify } from "util";
 import SettingsLayout from "../../components/SettingsLayout";
-import { NextPage } from "next";
 import {
   useSettingsEmailsQuery,
   useAddEmailMutation,
@@ -106,7 +105,7 @@ function Email({
   );
 }
 
-const Settings_Emails: NextPage = () => {
+const Settings_Emails: React.FC = () => {
   const [showAddEmailForm, setShowAddEmailForm] = useState(false);
   const [formError, setFormError] = useState<Error | ApolloError | null>(null);
   const { data, loading, error } = useSettingsEmailsQuery();

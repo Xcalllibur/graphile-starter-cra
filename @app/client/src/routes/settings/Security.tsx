@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useMemo, SyntheticEvent } from "react";
 import SettingsLayout from "../../components/SettingsLayout";
-import { NextPage } from "next";
 import {
   useChangePasswordMutation,
   useSettingsPasswordQuery,
@@ -16,7 +15,7 @@ import { formItemLayout, tailFormItemLayout } from "../../forms";
 import ErrorAlert from "../../components/ErrorAlert";
 import { H3, P } from "../../components/Text";
 
-const Settings_Security: NextPage = () => {
+const Settings_Security: React.FC = () => {
   const [error, setError] = useState<Error | ApolloError | null>(null);
   return (
     <SettingsLayout href="/settings/security">
