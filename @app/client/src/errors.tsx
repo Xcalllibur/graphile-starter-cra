@@ -38,5 +38,5 @@ export function getCodeFromError(
 ): null | string {
   const err = getExceptionFromError(error);
   // @ts-ignore
-  return (err && err.code ) || null;
+  return (err && err.code) || null;
 }

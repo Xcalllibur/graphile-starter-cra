@@ -47,9 +47,6 @@
     "test": "yarn raw test",
     "eject": "yarn raw eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",

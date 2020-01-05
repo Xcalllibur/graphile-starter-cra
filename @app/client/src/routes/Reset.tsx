@@ -10,7 +10,10 @@ interface IProps {
   token: string | null;
 }
 
-export const Reset: React.FC<IProps> = ({ userId: rawUserId, token: rawToken }) => {
+export const Reset: React.FC<IProps> = ({
+  userId: rawUserId,
+  token: rawToken,
+}) => {
   const [[userId, token], setIdAndToken] = useState<[number, string]>([
     rawUserId || 0,
     rawToken || "",
@@ -107,5 +110,4 @@ export const Reset: React.FC<IProps> = ({ userId: rawUserId, token: rawToken }) 
       </Row>
     </SharedLayout>
   );
-}
-
+};

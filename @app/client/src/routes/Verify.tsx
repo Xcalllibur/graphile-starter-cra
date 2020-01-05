@@ -9,7 +9,7 @@ interface IProps {
   token: string | null;
 }
 
-export const Verify: React.FC<IProps> = (props) => {
+export const Verify: React.FC<IProps> = props => {
   const [[id, token], setIdAndToken] = React.useState<[number, string]>([
     props.id || 0,
     props.token || "",
@@ -78,4 +78,4 @@ export const Verify: React.FC<IProps> = (props) => {
       </Row>
     </SharedLayout>
   );
-}
+};

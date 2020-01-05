@@ -21,7 +21,7 @@ import {
 import { useApolloClient } from "@apollo/react-hooks";
 import { useCallback } from "react";
 import StandardWidth from "./StandardWidth";
-import {Helmet} from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import Warn from "./Warn";
 import Error from "./ErrorAlert";
 import { ApolloError } from "apollo-client";
@@ -104,9 +104,7 @@ function SharedLayout({ title, noPad = false, children }: SharedLayoutProps) {
         </Helmet>
         <Row type="flex" justify="space-between">
           <Col span={6}>
-            <Link href="/">
-              Home
-            </Link>
+            <Link href="/">Home</Link>
           </Col>
           <Col>
             <h3>{title}</h3>
@@ -118,14 +116,10 @@ function SharedLayout({ title, noPad = false, children }: SharedLayoutProps) {
                   <Menu>
                     <Menu.Item>
                       <Link href="/settings" data-cy="layout-link-settings">
-                        <Warn okay={data.currentUser.isVerified}>
-                          Settings
-                        </Warn>
+                        <Warn okay={data.currentUser.isVerified}>Settings</Warn>
                       </Link>
                     </Menu.Item>
-                    <Menu.Item onClick={handleLogout}>
-                      Logout
-                    </Menu.Item>
+                    <Menu.Item onClick={handleLogout}>Logout</Menu.Item>
                   </Menu>
                 }
               >

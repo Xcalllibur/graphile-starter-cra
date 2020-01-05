@@ -65,9 +65,12 @@ export default function SettingsLayout({
 }: SettingsLayoutProps) {
   const href = pages[inHref] ? inHref : (Object.keys(pages)[0] as PageHref);
   const page = pages[href];
-  const curRoute = useCurrentRoute()
+  const curRoute = useCurrentRoute();
   const fullHref =
-    href + (curRoute && curRoute.url && curRoute.url.query ? `?${qs.stringify(curRoute.url.query)}` : "");
+    href +
+    (curRoute && curRoute.url && curRoute.url.query
+      ? `?${qs.stringify(curRoute.url.query)}`
+      : "");
   return (
     <SharedLayout title={`Settings: ${page.title}`} noPad>
       {({ currentUser, error, loading }: SharedLayoutChildProps) =>

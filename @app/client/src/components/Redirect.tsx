@@ -6,7 +6,7 @@ interface RedirectProps {
 }
 
 export default function Redirect({ href }: RedirectProps) {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   useEffect(() => {
     navigation.navigate(href);
   }, [href, navigation]);
