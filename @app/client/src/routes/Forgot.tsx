@@ -22,7 +22,7 @@ const ForgotPassword: React.FC = () => {
       <WrappedForgotPasswordForm error={error} setError={setError} />
     </SharedLayout>
   );
-}
+};
 
 interface FormValues {
   email: string;
@@ -141,9 +141,7 @@ function ForgotPasswordForm({
       </Form.Item>
       <Form.Item>
         <p>
-          <Link href="/login">
-            Remembered your password? Log in.
-          </Link>
+          <Link href="/login">Remembered your password? Log in.</Link>
         </p>
       </Form.Item>
     </Form>

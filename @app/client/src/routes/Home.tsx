@@ -275,8 +275,12 @@ const Home: React.FC = () => {
           <Title level={4}>PostGraphile relies on your support</Title>
           <Paragraph strong>A message from Benjie</Paragraph>
           <Paragraph>
-            I really hope that this project wows you <span role="img" aria-label="heart eyes">😍</span> and saves you huge
-            amounts of time. I've certainly poured a lot of time into it!
+            I really hope that this project wows you{" "}
+            <span role="img" aria-label="heart eyes">
+              😍
+            </span>{" "}
+            and saves you huge amounts of time. I've certainly poured a lot of
+            time into it!
           </Paragraph>
           <Paragraph>
             Without support from the community Jem and I could not keep building
@@ -290,14 +294,24 @@ const Home: React.FC = () => {
           <Paragraph>
             Every contribution helps us to spend more time on open source.
           </Paragraph>
-          <Button className="sponsor-graphile" type="primary" block href="https://graphile.org/sponsor">
+          <Button
+            className="sponsor-graphile"
+            type="primary"
+            block
+            href="https://graphile.org/sponsor"
+          >
             Sponsor Graphile Today
           </Button>
-          <Paragraph>Thank you! <span role="img" aria-label="thanks">🙏</span></Paragraph>
+          <Paragraph>
+            Thank you!{" "}
+            <span role="img" aria-label="thanks">
+              🙏
+            </span>
+          </Paragraph>
         </Col>
       </Row>
     </SharedLayout>
   );
-}
+};
 
 export default Home;

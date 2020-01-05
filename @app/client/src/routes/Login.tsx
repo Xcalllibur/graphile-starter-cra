@@ -86,7 +86,10 @@ export const Login: React.FC<LoginProps> = ({ next: rawNext }) => {
                   <Col>
                     <Paragraph>
                       No Account?{" "}
-                      <Link href="/register" data-cy="loginpage-button-register">
+                      <Link
+                        href="/register"
+                        data-cy="loginpage-button-register"
+                      >
                         Create One
                       </Link>
                     </Paragraph>
@@ -99,7 +102,7 @@ export const Login: React.FC<LoginProps> = ({ next: rawNext }) => {
       }
     </SharedLayout>
   );
-}
+};
 
 interface FormValues {
   username: string;
@@ -161,7 +164,15 @@ function LoginForm({
         }
       }
     },
-    [client, form, login, onSuccessRedirectTo, setError, validateFields, navigation]
+    [
+      client,
+      form,
+      login,
+      onSuccessRedirectTo,
+      setError,
+      validateFields,
+      navigation,
+    ]
   );
 
   const focusElement = useRef<Input>(null);
@@ -212,9 +223,7 @@ function LoginForm({
           />
         )}
 
-        <Link href="/forgot">
-          Forgotten password?
-        </Link>
+        <Link href="/forgot">Forgotten password?</Link>
       </Form.Item>
 
       {error ? (
@@ -245,11 +254,7 @@ function LoginForm({
         >
           Sign in
         </Button>
-        <Button
-          type="link"
-          style={{ marginLeft: 16 }}
-          onClick={onCancel}
-        >
+        <Button type="link" style={{ marginLeft: 16 }} onClick={onCancel}>
           Use a different sign in method
         </Button>
       </Form.Item>

@@ -1,19 +1,20 @@
 # Graphile Starter - Create React App (CRA) edition
 
-The [original Graphile Starter](https://github.com/graphile/starter) uses Next.js to enable Server Side Rendering (SSR).
-However, there are cases, such as apps sitting behind the login wall, when Client
-Side Rendering (CSR) is enough and Next.js only adds unnecessary complexity. This
-fork replaces the Next.js-based SSR client with CRA-based CSR client. All the
-client pages and components were kept as close as possible to the original.
+The [original Graphile Starter](https://github.com/graphile/starter) uses
+Next.js to enable Server Side Rendering (SSR). However, there are cases, such as
+apps sitting behind the login wall, when Client Side Rendering (CSR) is enough
+and Next.js only adds unnecessary complexity. This fork replaces the
+Next.js-based SSR client with CRA-based CSR client. All the client pages and
+components were kept as close as possible to the original.
 
 ## Differences from the original starter
 
 - CRA-based client
 - Uses [Navi](https://github.com/frontarm/navi) for routing
 - In Dev Mode, Client requests are redirected to CRA's DevServer (CORS support
-enabled)
+  enabled)
 
---------------------------------------------------------------------------------
+---
 
 # Graphile Starter
 

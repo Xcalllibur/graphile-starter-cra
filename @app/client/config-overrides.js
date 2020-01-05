@@ -1,4 +1,9 @@
-const { override, fixBabelImports, addLessLoader, addWebpackPlugin } = require("customize-cra");
+const {
+  override,
+  fixBabelImports,
+  addLessLoader,
+  addWebpackPlugin,
+} = require("customize-cra");
 
 const webpack = require("webpack");
 const lessToJS = require("less-vars-to-js");
@@ -12,10 +17,7 @@ if (!ROOT_URL) {
 
 // Where your antd-custom.less file lives
 const themeVariables = lessToJS(
-  fs.readFileSync(
-    path.resolve(__dirname, "assets/antd-custom.less"),
-    "utf8"
-  )
+  fs.readFileSync(path.resolve(__dirname, "assets/antd-custom.less"), "utf8")
 );
 
 module.exports = override(
@@ -28,8 +30,10 @@ module.exports = override(
     javascriptEnabled: true,
     modifyVars: themeVariables, // make your antd custom effective
   }),
-  addWebpackPlugin(new webpack.DefinePlugin({
-    "process.env.ROOT_URL": JSON.stringify(ROOT_URL),
-    "process.env.T_AND_C_URL": JSON.stringify(T_AND_C_URL || null),
-  }))
+  addWebpackPlugin(
+    new webpack.DefinePlugin({
+      "process.env.ROOT_URL": JSON.stringify(ROOT_URL),
+      "process.env.T_AND_C_URL": JSON.stringify(T_AND_C_URL || null),
+    })
+  )
 );

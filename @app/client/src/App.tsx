@@ -1,5 +1,5 @@
 import "./App.less";
-import React, { Suspense } from 'react';
+import React, { Suspense } from "react";
 import { Router, View, NotFoundBoundary, useLoadingRoute } from "react-navi";
 import { ApolloProvider } from "@apollo/react-hooks";
 import NProgress from "nprogress";
@@ -25,17 +25,16 @@ function Loading() {
   return null;
 }
 
-
 const App: React.FC = () => {
   return (
     <div className="App">
       <HelmetProvider>
         <ApolloProvider client={client}>
           <Router routes={routes}>
-            <Loading/>
+            <Loading />
             <NotFoundBoundary render={FourOhFour}>
               <Suspense fallback={null}>
-                <View/>
+                <View />
               </Suspense>
             </NotFoundBoundary>
           </Router>
@@ -43,6 +42,6 @@ const App: React.FC = () => {
       </HelmetProvider>
     </div>
   );
-}
+};
 
 export default App;

@@ -12,11 +12,8 @@ function FourOhFour() {
           <div>
             <H2>Page Not Found</H2>
             <P>
-              The page you attempted to load was not found. Please check the URL and
-              try again, or visit{" "}
-              <Link href="/">
-                the homepage
-              </Link>
+              The page you attempted to load was not found. Please check the URL
+              and try again, or visit <Link href="/">the homepage</Link>
             </P>
           </div>
         </Col>

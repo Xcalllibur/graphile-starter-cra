@@ -13,9 +13,13 @@ import { useCurrentRoute } from "react-navi";
 const { Text } = Typography;
 
 export default function Settings_Accounts() {
-  const curRoute = useCurrentRoute()
+  const curRoute = useCurrentRoute();
   const token: string | null =
-    (curRoute && curRoute.url && curRoute.url.query && curRoute.url.query.token) || null;
+    (curRoute &&
+      curRoute.url &&
+      curRoute.url.query &&
+      curRoute.url.query.token) ||
+    null;
   const [error, setError] = useState<Error | ApolloError | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [itIsDone, setItIsDone] = useState(false);

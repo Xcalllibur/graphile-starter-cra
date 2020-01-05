@@ -1,26 +1,26 @@
-import * as React from 'react';
-import { mount, route, map } from 'navi'
+import * as React from "react";
+import { mount, route, map } from "navi";
 
 const routes = mount({
   "/": route({
-    getView: () => import("./routes/Home")
+    getView: () => import("./routes/Home"),
   }),
   "/login": map(async (_request, _context) =>
     route({
       getView: async (req, _context) => {
         const { Login } = await import("./routes/Login");
-        return <Login next={req.params.next} />
+        return <Login next={req.params.next} />;
       },
     })
   ),
   "/register": route({
-    getView: () => import("./routes/Register")
+    getView: () => import("./routes/Register"),
   }),
   "/verify": map(async (_request, _context) =>
     route({
       getView: async (req, _context) => {
         const { Verify } = await import("./routes/Verify");
-        return <Verify id={req.params.id} token={req.params.token} />
+        return <Verify id={req.params.id} token={req.params.token} />;
       },
     })
   ),
@@ -28,30 +28,32 @@ const routes = mount({
     route({
       getView: async (req, _context) => {
         const { Reset } = await import("./routes/Reset");
-        return <Reset userId={req.params["user-id"]} token={req.params["token"]} />
+        return (
+          <Reset userId={req.params["user-id"]} token={req.params["token"]} />
+        );
       },
     })
   ),
   "/forgot": route({
-    getView: () => import("./routes/Forgot")
+    getView: () => import("./routes/Forgot"),
   }),
   "/settings": mount({
     "/": route({
-      getView: () => import("./routes/settings/Index")
+      getView: () => import("./routes/settings/Index"),
     }),
     "/security": route({
-      getView: () => import("./routes/settings/Security")
+      getView: () => import("./routes/settings/Security"),
     }),
     "/accounts": route({
-      getView: () => import("./routes/settings/Accounts")
+      getView: () => import("./routes/settings/Accounts"),
     }),
     "/delete": route({
-      getView: () => import("./routes/settings/Delete")
+      getView: () => import("./routes/settings/Delete"),
     }),
     "/emails": route({
-      getView: () => import("./routes/settings/Emails")
+      getView: () => import("./routes/settings/Emails"),
     }),
-  })
-})
+  }),
+});
 
 export default routes;

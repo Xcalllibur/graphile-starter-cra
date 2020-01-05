@@ -29,7 +29,7 @@ interface RegisterProps {}
  * The registration page just renders the standard layout and embeds the
  * registration form.
  */
-const Register: React.FC<RegisterProps> = (_props) => {
+const Register: React.FC<RegisterProps> = _props => {
   const [error, setError] = useState<Error | ApolloError | null>(null);
   return (
     <SharedLayout title="Register">
@@ -40,7 +40,7 @@ const Register: React.FC<RegisterProps> = (_props) => {
       />
     </SharedLayout>
   );
-}
+};
 
 /**
  * These are the values in our form

@@ -74,7 +74,9 @@ function Email({
       <List.Item.Meta
         avatar={
           <Avatar size="large" style={{ backgroundColor: "transparent" }}>
-            <span role="img" aria-label="email">✉️</span>
+            <span role="img" aria-label="email">
+              ✉️
+            </span>
           </Avatar>
         }
         title={

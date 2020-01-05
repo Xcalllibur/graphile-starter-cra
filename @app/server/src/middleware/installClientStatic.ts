@@ -5,12 +5,12 @@ export default (app: Express) => {
   const port = process.env.CRA_DEVSERVER_PORT || 3001;
 
   if (isDev) {
-    app.get("*", function(req, res) {
+    app.get("*", (req, res) => {
       res.redirect(`http://localhost:${port}` + req.url);
     });
   } else {
     app.use(staticMiddleware(`${__dirname}/../../../client/build`));
-    app.get("*", function(_req, res) {
+    app.get("*", (_req, res) => {
       res.sendFile(`${__dirname}/../../../client/build`, "index.html");
     });
   }
