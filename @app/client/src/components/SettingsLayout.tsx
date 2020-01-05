@@ -52,7 +52,7 @@ const pages = {
   }),
 };
 
-type PageHref = keyof (typeof pages);
+type PageHref = keyof typeof pages;
 
 interface SettingsLayoutProps {
   href: PageHref;
