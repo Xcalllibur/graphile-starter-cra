@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-navi";
-import { H2, P } from "./components/Text";
-import SharedLayout from "./components/SharedLayout";
+import { H2, P } from "@app/components";
+import SharedLayout from "./layout/SharedLayout";
 import { Row, Col } from "antd";
 
 function FourOhFour() {
