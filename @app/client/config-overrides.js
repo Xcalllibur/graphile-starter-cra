@@ -21,8 +21,13 @@ const themeVariables = lessToJS(
 );
 
 module.exports = override(
-  fixBabelImports("import", {
+  fixBabelImports("antd", {
     libraryName: "antd",
+  }),
+  fixBabelImports("lodash", {
+    libraryName: "lodash",
+    libraryDirectory: "",
+    camel2DashComponentName: false,
   }),
   addLessLoader({
     javascriptEnabled: true,

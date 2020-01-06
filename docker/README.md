@@ -87,8 +87,8 @@ extends `server`, our normal `node.js` server service container.
 This decision was made to separate the docker services, one for minimal setup
 and for comfortable development.
 
-The `server` service is for starting the Node.js server with React and Next.js,
-and will keep running until `yarn start` stops or crashes. This is similar to a
+The `server` service is for starting the Node.js server with CRA DevServer, and
+will keep running until `yarn start` stops or crashes. This is similar to a
 production deployment environment except hot reload, environment variables, and
 similar things are tuned for active development (and are not production ready).
 See:

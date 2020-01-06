@@ -40,20 +40,6 @@ const Home: React.FC = () => {
             related triggers.
           </Paragraph>
 
-          <Title level={4}>Next.js and page load delays: dev only</Title>
-          <Paragraph>
-            We use Next.js to serve the React app. This gives us server-side
-            rendering, routing, bundle splitting, hot reloading, and much more.
-            However, in development when you visit a page it must first be
-            loaded from the file system and transpiled and bundled by the
-            server, served to the client, and then executed. This means there
-            can be a small delay when loading a web page for the first time in
-            development. In production, this delay should be vastly smaller, and
-            can be eliminated with prefetching. You can read more about this in
-            the{" "}
-            <a href="https://nextjs.org/docs#prefetching-pages">Next.js docs</a>
-          </Paragraph>
-
           <Title level={4}>Page hangs: development only</Title>
           <Paragraph>
             If the page hangs this is likely because the Next server was

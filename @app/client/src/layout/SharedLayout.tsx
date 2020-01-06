@@ -17,7 +17,6 @@ import {
   useCurrentUserUpdatedSubscription,
   SharedLayout_UserFragment,
 } from "@app/graphql";
-// import Router from "next/router";
 import { useApolloClient } from "@apollo/react-hooks";
 import { useCallback } from "react";
 import { StandardWidth, Warn, ErrorAlert } from "@app/components";

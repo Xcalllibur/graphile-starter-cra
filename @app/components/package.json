@@ -8,8 +8,9 @@
   "dependencies": {
     "antd": "^3.26.3",
     "apollo-client": "^2.6.8",
-    "next": "^9.0.3",
+    "navi": "^0.14.0",
     "react": "^16.9.0",
+    "react-navi": "^0.14.2",
     "tslib": "^1.10.0"
   }
 }
