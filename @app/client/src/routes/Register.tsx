@@ -6,7 +6,7 @@ import React, {
   useEffect,
   FocusEvent,
 } from "react";
-import SharedLayout from "../components/SharedLayout";
+import SharedLayout from "../layout/SharedLayout";
 import { useApolloClient } from "@apollo/react-hooks";
 import { useRegisterMutation } from "@app/graphql";
 import { useNavigation } from "react-navi";

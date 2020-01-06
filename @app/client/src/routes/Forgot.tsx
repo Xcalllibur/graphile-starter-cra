@@ -7,7 +7,7 @@ import React, {
   useMemo,
 } from "react";
 import { promisify } from "util";
-import SharedLayout from "../components/SharedLayout";
+import SharedLayout from "../layout/SharedLayout";
 import { Link } from "react-navi";
 import { Form, Icon, Input, Button, Alert } from "antd";
 import { FormComponentProps, ValidateFieldsOptions } from "antd/lib/form/Form";

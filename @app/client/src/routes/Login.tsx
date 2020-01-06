@@ -10,7 +10,7 @@ import SharedLayout, {
   Row,
   Col,
   SharedLayoutChildProps,
-} from "../components/SharedLayout";
+} from "../layout/SharedLayout";
 import { Link, useNavigation } from "react-navi";
 import { Form, Icon, Input, Button, Alert, Typography } from "antd";
 import { FormComponentProps, ValidateFieldsOptions } from "antd/lib/form/Form";
@@ -19,8 +19,7 @@ import { useApolloClient } from "@apollo/react-hooks";
 import { useLoginMutation } from "@app/graphql";
 import { ApolloError } from "apollo-client";
 import { getCodeFromError, extractError } from "../errors";
-import Redirect from "../components/Redirect";
-import SocialLoginOptions from "../components/SocialLoginOptions";
+import { Redirect, SocialLoginOptions } from "@app/components";
 import { resetWebsocketConnection } from "../helpers/apolloClient";
 
 const { Paragraph } = Typography;

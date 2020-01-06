@@ -1,9 +1,8 @@
 import "./Home.less";
 import React from "react";
 import { Button, Row, Col, Typography, Divider } from "antd";
-import SharedLayout from "../components/SharedLayout";
-
 const { Text, Title, Paragraph } = Typography;
+import SharedLayout from "../layout/SharedLayout";
 
 // Convenience helper
 const Li = ({ children, ...props }: any) => (

@@ -1,14 +1,18 @@
 import React, { useCallback, useState } from "react";
-import SettingsLayout from "../../components/SettingsLayout";
+import SettingsLayout from "../../layout/SettingsLayout";
 import {
   useCurrentUserAuthenticationsQuery,
   useUnlinkUserAuthenticationMutation,
   UserAuthentication,
 } from "@app/graphql";
 import { Spin, List, Avatar, Modal, Button } from "antd";
-import SocialLoginOptions from "../../components/SocialLoginOptions";
-import Error from "../../components/ErrorAlert";
-import { H3, H4, Strong } from "../../components/Text";
+import {
+  SocialLoginOptions,
+  ErrorAlert,
+  H3,
+  H4,
+  Strong,
+} from "@app/components";
 
 const AUTH_NAME_LOOKUP: {
   [key: string]: string;
@@ -108,7 +112,7 @@ const Settings_Accounts: React.FC = () => {
   return (
     <SettingsLayout href="/settings/accounts">
       <H3>Linked Accounts</H3>
-      {error && !loading ? <Error error={error} /> : linkedAccounts}
+      {error && !loading ? <ErrorAlert error={error} /> : linkedAccounts}
       <H4>Link another account</H4>
       <SocialLoginOptions
         next="/settings/accounts"
